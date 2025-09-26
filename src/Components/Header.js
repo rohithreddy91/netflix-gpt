@@ -1,8 +1,37 @@
+import { useDispatch, useSelector } from "react-redux";
+import { BG_URL, SUPPORTED_LANGUAGES } from "../Utils/constants";
+import { setGptSearchView } from "../Utils/GptSearchSlice";
+import { languageSelection } from "../Utils/configSlice";
 const Header = ()=>{
+    const dispatch = useDispatch();
+
+    const handleGPTSearchButtonClick = ()=>{
+        dispatch(setGptSearchView());
+    }
+
+    const handleLanguageChange = (e)=>{
+        dispatch(languageSelection(e.target.value));
+    }
+
+    const showGptSearch = useSelector(store=>store.gpt.gptSearchView)
+
     return (
         <div className="w-screen absolute z-10 bg-gradient-to-b from-black to-transparent">
             <img alt="logo" className="w-40 p-2"
-            src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-07-14/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png" />
+            src= {BG_URL} />
+            <button className="bg-purple-900 text-white p-2 rounded-md absolute right-10 top-4"
+            onClick={handleGPTSearchButtonClick}
+            >
+                {showGptSearch ? "Home":"GptSearch"}
+            </button>
+            <div className="absolute right-10 top-16">
+            {showGptSearch && <select onChange={handleLanguageChange}>
+            {SUPPORTED_LANGUAGES.map(language => <option key={language.identifier} value={language.identifier}>
+                {language.name}
+                </option>)
+            }
+        </select>}
+        </div>
         </div>
     )
 };

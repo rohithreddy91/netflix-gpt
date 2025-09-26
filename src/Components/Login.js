@@ -2,6 +2,7 @@ import { checkValidData } from "../Utils/Validate";
 import Header from "./Header";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { LONG_BG_URL } from "../Utils/constants";
 const Login = ()=>{
 
     const [isSetLogin,setIsSetLogin] = useState(true)
@@ -34,7 +35,7 @@ const Login = ()=>{
         <Header/>
         <div className="absolute">
         <img alt="logo" 
-        src = "https://assets.nflxext.com/ffe/siteui/vlv3/a927b1ee-784d-494a-aa80-cf7a062d2523/web/IN-en-20250714-TRIFECTA-perspective_5acb7337-c372-45ec-ae12-ddb110e6ad78_large.jpg"/>
+        src = {LONG_BG_URL}/>
         </div>
         <form onSubmit={(e)=>e.preventDefault()} className="w-3/12 absolute bg-black p-12 text-white my-36 mx-auto right-0 left-0 rounded-lg bg-opacity-80">
         <h1 className="text-3xl font-bold">{isSetLogin?"Sign In":"Sign Up"}</h1>
@@ -46,7 +47,6 @@ const Login = ()=>{
         <p className="my-4 cursor-pointer" onClick={handleToggle}>{isSetLogin?"New to Netflix?Sign Up now":"Already have an account? Sign In"}</p>
         </form>
     </div>
-
-  );
+    );
 };
 export default Login;
